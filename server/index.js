@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import helmet from "helmet";
+import connectDB from "./config/connectDB.js";
 
 dotenv.config();
 const app = express();
@@ -30,6 +31,8 @@ app.get("/", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log("server is running", PORT);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log("server is running", PORT);
+  });
 });
