@@ -9,17 +9,18 @@ const Dashboard = () => {
   console.log("user dashboard",user)
   return (
     <section className='bg-white'>
-        <div className='container mx-auto p-3 grid lg:grid-cols-[250px,1fr]  '>
-                {/**left for menu */}
-                <div className='py-4 sticky top-24 max-h-[calc(100vh-96px)] overflow-y-auto hidden lg:block border-r'>
-                    <UserMenu/>
-                </div>
+        <div className="container mx-auto p-3 grid lg:grid-cols-[250px_1fr] gap-4">
 
+        {/* Left section */}
+        <div className="py-4 sticky top-24 max-h-[calc(100vh-96px)] overflow-y-auto border-r">
+          <UserMenu />
+        </div>
 
-                {/**right for content */}
-                <div className='bg-white min-h-[75vh] '>
-                    <Outlet/>
-                </div>
+        {/* Right section */}
+        <div className="bg-white min-h-[75vh]">
+          <Outlet />
+        </div>
+
         </div>
     </section>
   )

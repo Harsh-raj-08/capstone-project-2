@@ -14,6 +14,7 @@ import productRouter from "./route/product.route.js";
 import cartRouter from "./route/cart.route.js";
 import addressRouter from "./route/address.route.js";
 // import orderRouter from "./route/order.route.js";
+import ProductModel from "./models/product.model.js";
 
 const app = express();
 app.use(
@@ -49,8 +50,18 @@ app.use("/api/cart", cartRouter);
 app.use("/api/address", addressRouter);
 // app.use("/api/order", orderRouter);
 
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log("Server is running", PORT);
+connectDB()
+  .then(async () => {
+    try {
+      await ProductModel.syncIndexes();
+      console.log("Product indexes synced");
+    } catch (error) {
+      console.error("Failed to sync product indexes", error);
+    }
+    app.listen(PORT, () => {
+      console.log("Server is running", PORT);
+    });
+  })
+  .catch((error) => {
+    console.error("DB connection failed", error);
   });
-});
